@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
-from django.urls import path
+import xadmin
+from django.urls import path, include, re_path
+from rest_framework.documentation import include_docs_urls
+from .router import router
+from util import common_util
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    re_path('^', include(router.urls)),  # api路由
+    path('xadmin/', xadmin.site.urls),  # xadmin后台
+    path('ueditor/', include('DjangoUeditor.urls')),  # 富编辑
+    path('docs/', include_docs_urls(title=common_util.df_config['PLATFORM_NAME'])),  # 文档
+    path('api-auth', include('rest_framework.urls', namespace="rest_framework")),  # 认证
 ]
