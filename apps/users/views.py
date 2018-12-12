@@ -8,9 +8,10 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, GroupSerializer
 # 导入模型
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 
 User = get_user_model()
 
@@ -30,6 +31,15 @@ class UserPagination(PageNumberPagination):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.DjangoModelPermissions,)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name',)
+    ordering_fields = ('id',)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
     permission_classes = (permissions.DjangoModelPermissions,)
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('name',)

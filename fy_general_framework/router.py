@@ -7,8 +7,9 @@ __author__ = 'Peter.Fang'
 
 from rest_framework.routers import DefaultRouter
 from apps.station.views import StationViewSet
-from apps.users.views import UserViewSet
+from apps.users.views import UserViewSet, GroupViewSet
 
 router = DefaultRouter()
 router.register(r'user', UserViewSet)
+router.register(r'group', GroupViewSet)
 router.register(r'station', StationViewSet)
