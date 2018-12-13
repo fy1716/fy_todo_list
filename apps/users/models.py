@@ -23,6 +23,11 @@ class UserProfile(AbstractUser):
     class Meta:
         verbose_name = "用户信息"
         verbose_name_plural = verbose_name
+        # permissions = (
+        #     ('add_userprofile', '新增用户信息'),
+        #     ('change_userprofile', '修改用户信息'),
+        #     ('delete_userprofile', '删除用户信息'),
+        # )
 
     def __str__(self):
         return self.username
