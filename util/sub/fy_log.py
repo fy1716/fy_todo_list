@@ -17,7 +17,7 @@ def log_init(trace, file_name):
 
     path, name = os.path.split(call_name)
     dir_name = os.path.basename(path)
-    logfile_head = '_'.join((dir_name, name))
+    logfile_head = file_name or '_'.join((dir_name, name))
 
     # re_obj = re.compile(r'\w*\.py?')
     # res = re_obj.findall(trace[0])
