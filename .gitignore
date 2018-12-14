@@ -1,4 +1,4 @@
 .idea
 *.log
 migrations/
-node/
+frontend/*
