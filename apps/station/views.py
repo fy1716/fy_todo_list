@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from rest_framework import viewsets
 from rest_framework import permissions
 # 分页
@@ -11,6 +9,7 @@ from rest_framework import filters
 from .models import Station
 from .filters import StationFilter
 from .serializers import StationSerializer
+from util import common_util
 
 
 class StationPagination(PageNumberPagination):
@@ -28,6 +27,7 @@ class StationPagination(PageNumberPagination):
 
 
 class StationViewSet(viewsets.ModelViewSet):
+    common_util.debug('this is a log')
     '''
     站点列表，分页，搜索，过滤，权限，排序
     '''
