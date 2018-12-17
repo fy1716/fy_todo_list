@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'coreschema',
     'django_filters',
-    'station',
+    'todo_list',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'fy_todo_list.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'general_framework',  # 数据库名字
+        'NAME': 'fy_todo_list',  # 数据库名字
         'USER': 'root',  # 账号
         'PASSWORD': '000000',  # 密码
         'HOST': '127.0.0.1',  # IP
