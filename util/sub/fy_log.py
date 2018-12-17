@@ -7,7 +7,7 @@ __author__ = 'Peter.Fang'
 import re
 import os
 import logging
-from fy_general_framework import settings
+from fy_todo_list import settings
 
 
 def log_init(trace, file_name):
