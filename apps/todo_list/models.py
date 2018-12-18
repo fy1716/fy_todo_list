@@ -18,6 +18,6 @@ class Items(models.Model):
     finish_flag = models.BooleanField(verbose_name="是否完成", default=False)
     finish_degree = models.SmallIntegerField(verbose_name="完成度", default=0)  # 百分制
     priority = models.SmallIntegerField(verbose_name="优先级", default=0)
-    item_type = models.ForeignKey('Type', on_delete=models.CASCADE, related_name='items')
-    schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE)
-    remark = models.CharField(max_length=512)
+    item_type = models.ForeignKey('Type', on_delete=models.CASCADE, related_name='items', verbose_name="类型")
+    schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE, verbose_name="所属计划")
+    remark = models.CharField(max_length=512, verbose_name="备注", blank=True)
