@@ -4,9 +4,11 @@ from rest_framework.pagination import PageNumberPagination
 # 过滤
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+# 混合类
+from rest_framework import mixins
 
-from .models import *
-from .serializers import *
+from .models import Items, Type, Schedule
+from .serializers import TypeSerializer, ItemsSerializer, ScheduleSerializer
 from util import common_util
 
 
@@ -29,4 +31,15 @@ class ItemsViewSet(viewsets.ModelViewSet):
     # 排序
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     # 搜索
-    search_fields = ('title',)
+    search_fields = ('title', 'content')
+    ordering_fields = ('priority',)
+
+
+class ScheduleViewSet(viewsets.ModelViewSet):
+    queryset = Schedule.objects.all()
+    serializer_class = ScheduleSerializer
+
+
+class TypeViewSet(viewsets.ModelViewSet):
+    queryset = Type.objects.all()
+    serializer_class = TypeSerializer
