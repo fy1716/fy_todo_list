@@ -10,9 +10,17 @@ class Type(models.Model):
     name = models.CharField(max_length=32, verbose_name="名称")
     degree = models.CharField(verbose_name="重要度", max_length=8, choices=DEGREE_CHOICES, default="low")
 
+    class Meta:
+        verbose_name = '类型'
+        verbose_name_plural = verbose_name
+
 
 class Schedule(models.Model):
     date = models.DateField(verbose_name="日期")
+
+    class Meta:
+        verbose_name = '计划'
+        verbose_name_plural = verbose_name
 
 
 class Items(models.Model):
@@ -26,3 +34,7 @@ class Items(models.Model):
     item_type = models.ForeignKey('Type', on_delete=models.CASCADE, related_name='items', verbose_name="类型")
     schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE, verbose_name="所属计划")
     remark = models.CharField(max_length=512, verbose_name="备注", blank=True)
+
+    class Meta:
+        verbose_name = '事项'
+        verbose_name_plural = verbose_name

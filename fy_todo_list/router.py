@@ -13,6 +13,7 @@ router = DefaultRouter()
 router.register(r'user', UserViewSet)
 router.register(r'group', GroupViewSet)
 router.register(r'permission', PermissionListViewSet)
+
 router.register(r'items', ItemsViewSet)
 router.register(r'type', TypeViewSet)
 router.register(r'schedule', ScheduleViewSet)
