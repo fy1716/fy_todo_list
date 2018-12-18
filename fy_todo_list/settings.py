@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'coreschema',
     'django_filters',
-    'todo_list',
+    'apps.todo_list',
 ]
 
 MIDDLEWARE = [
