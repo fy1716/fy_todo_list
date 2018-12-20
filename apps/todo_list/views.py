@@ -13,9 +13,9 @@ from util import common_util
 
 
 class ItemsPagination(PageNumberPagination):
-    '''
+    """
     站点列表自定义分页
-    '''
+    """
     # 默认每页显示的个数
     page_size = 8
     # 可以动态改变每页显示的个数
