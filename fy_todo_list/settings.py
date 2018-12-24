@@ -27,7 +27,7 @@ SECRET_KEY = '%$+!##k1#f7#(oo39*osaaz3_h9f+zlb@(jxy1&%7sb*chks+d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -65,9 +65,7 @@ ROOT_URLCONF = 'fy_todo_list.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend/dist']
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,6 +91,10 @@ DATABASES = {
         'PASSWORD': '000000',  # 密码
         'HOST': '127.0.0.1',  # IP
         'PORT': '3306',  # 端口
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
     }
 }
 
