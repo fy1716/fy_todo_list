@@ -3,6 +3,7 @@ import datetime
 
 
 class Type(models.Model):
+    code = models.SmallIntegerField(verbose_name="编号")
     name = models.CharField(max_length=32, verbose_name="名称")
 
     class Meta:
