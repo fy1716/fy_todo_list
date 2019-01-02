@@ -7,6 +7,7 @@ __author__ = 'Peter.Fang'
 
 import uuid
 import traceback
+from django.http import JsonResponse
 
 from . import config
 from .sub.fy_log import log_close, log_init
@@ -28,3 +29,11 @@ def info(msg, file_name=''):
     logger, handler, d = log_init(traceback.extract_stack(), file_name)
     logger.info(msg, extra=d)
     log_close(handler, logger)
+
+
+def json_response(result, message=''):
+    result_format = {
+        "result": result,
+        "message": message
+    }
+    return JsonResponse(result_format)

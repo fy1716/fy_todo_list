@@ -12,8 +12,8 @@ class Type(models.Model):
 
 
 class Schedule(models.Model):
-    date = models.DateField(verbose_name="日期")
-    rate = models.SmallIntegerField(verbose_name="评分")
+    date = models.DateField(unique=True, verbose_name="日期")
+    rate = models.SmallIntegerField(default=0, verbose_name="评分")
 
     class Meta:
         verbose_name = '计划'

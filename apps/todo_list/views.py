@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from datetime import date
 from rest_framework import viewsets
 # 分页
 from rest_framework.pagination import PageNumberPagination
@@ -43,3 +45,17 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
+
+
+def _calc_rate():
+    return 100
+    # 获取当天的所有items
+    # 按重要性分别对应3/2/1分，计算当天的总分
+    # 计算完成分
+    # 按百分制计算当天的rate
+
+
+def update_rate(request):
+    rate = _calc_rate()
+    Schedule.objects.update_or_create(date=date.today(), rate=rate)
+    return common_util.json_response(True)
