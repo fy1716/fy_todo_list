@@ -30,6 +30,9 @@ class ItemsSerializer(serializers.ModelSerializer):
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        pass
+
     class Meta:
         model = Schedule
         fields = "__all__"
