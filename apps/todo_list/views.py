@@ -33,8 +33,9 @@ class ItemsViewSet(viewsets.ModelViewSet):
     # 排序
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     # 搜索
-    search_fields = ('title', 'content')
-    ordering_fields = ('priority',)
+    search_fields = ('title', 'content', 'date')
+    ordering_fields = ('finish_flag', 'priority')
+    ordering = ('finish_flag',)
 
 
 class ScheduleViewSet(viewsets.ModelViewSet):
