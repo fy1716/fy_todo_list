@@ -31,9 +31,11 @@ def info(msg, file_name=''):
     log_close(handler, logger)
 
 
-def json_response(result, message=''):
+def json_response(result, data=None, message=''):
+    data = data or []
     result_format = {
         "result": result,
+        "data": data,
         "message": message
     }
     return JsonResponse(result_format)

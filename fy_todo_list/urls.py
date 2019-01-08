@@ -22,10 +22,12 @@ from rest_framework_jwt.views import obtain_jwt_token
 from fy_todo_list import settings
 from .router import router
 from util import common_util
+from todo_list.views import RateView
 
 schema_view = get_swagger_view(title=common_util.df_config['PLATFORM_NAME'])
 urlpatterns = [
     re_path('^', include(router.urls)),  # api路由
+    path('api/rate/', RateView.as_view()),  # rate评分
     path('admin/', admin.site.urls),  # xadmin后台
     path('xadmin/', xadmin.site.urls),  # xadmin后台
     path('ueditor/', include('DjangoUeditor.urls')),  # 富编辑

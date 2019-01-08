@@ -1,5 +1,6 @@
-from django.http import JsonResponse
 from datetime import date
+from django.views.generic import View
+from django.core import serializers
 from rest_framework import viewsets
 # 分页
 from rest_framework.pagination import PageNumberPagination
@@ -55,7 +56,13 @@ def _calc_rate():
     # 按百分制计算当天的rate
 
 
-def update_rate(request):
-    rate = _calc_rate()
-    Schedule.objects.update_or_create(date=date.today(), rate=rate)
-    return common_util.json_response(True)
+class RateView(View):
+    def get(self, request):
+        date = request.GET.get('date')
+        ret = Schedule.objects.filter(date=date).values('rate')
+        return common_util.json_response(True, data=ret[0])
+
+    def post(self, request):
+        rate = _calc_rate()
+        Schedule.objects.update_or_create(date=date.today(), rate=rate)
+        return common_util.json_response(True)
