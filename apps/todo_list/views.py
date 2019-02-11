@@ -49,21 +49,47 @@ class TypeViewSet(viewsets.ModelViewSet):
     serializer_class = TypeSerializer
 
 
+def _get_degree(item):
+    return getattr(common_util.df_config['DEGREE_MAP'], item.degree)
+
+
+def _get_finish_degree(item):
+    return getattr(common_util.df_config['DEGREE_MAP'], item.degree) * item.finish_degree
+
+
+def _check_task_count():
+    items = Items.objects.filter(date=date.today())
+    if common_util.df_config['TASK_COUNT'] > items.count():
+        return False
+    return True
+
+
 def _calc_rate():
-    return 100
     # 获取当天的所有items
+    items = Items.objects.filter(date=date.today())
     # 按重要性分别对应3/2/1分，计算当天的总分
+    total = sum(map(_get_degree, items))
     # 计算完成分
+    achievement = sum(map(_get_finish_degree, items))
     # 按百分制计算当天的rate
+    return common_util.floor(achievement / total)
 
 
 class RateView(View):
     def get(self, request):
+        ret = _check_task_count()
+        if not ret:
+            return common_util.json_response(False, message="当天任务数太少，不予评分")
+
         date = request.GET.get('date')
         ret = Schedule.objects.filter(date=date).values('rate')
         return common_util.json_response(True, data=ret[0])
 
     def post(self, request):
+        ret = _check_task_count()
+        if not ret:
+            return common_util.json_response(False, message="当天任务数太少，不予评分")
+
         rate = _calc_rate()
-        Schedule.objects.update_or_create(date=date.today(), rate=rate)
-        return common_util.json_response(True)
+        Schedule.objects.update_or_create(date=date.today(), defaults={"date": date.today(), "rate": rate})
+        return common_util.json_response(True, message="更新评分成功")

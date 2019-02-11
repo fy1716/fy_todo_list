@@ -6,6 +6,7 @@
 __author__ = 'Peter.Fang'
 
 import uuid
+import math
 import traceback
 from django.http import JsonResponse
 
@@ -39,3 +40,6 @@ def json_response(result, data=None, message=''):
         "message": message
     }
     return JsonResponse(result_format)
+
+
+floor = math.floor
