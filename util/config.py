@@ -11,6 +11,6 @@ _dm = _DEGREE_MAP(1, 2, 3)
 
 df_config = {
     "PLATFORM_NAME": "通用管理平台",
-    "TASK_COUNT": 5,
+    "TASK_COUNT": 3,
     "DEGREE_MAP": _dm
 }
